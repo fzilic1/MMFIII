@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace red
+{
+    class Program
+    {
+        static void Ulaz(ref Cvor vrh)
+        {
+            if (vrh == null)
+            {
+                Console.WriteLine("Unesi novi broj za red");
+                int b = int.Parse(Console.ReadLine());
+                Cvor novi = new Cvor(b);
+                novi.next = vrh;
+                vrh = novi;
+            }
+            else
+            {
+                Console.WriteLine("Unesi novi broj za red");
+                int b = int.Parse(Console.ReadLine());
+                Cvor novi = new Cvor(b);
+                Cvor temp = vrh;
+                while (temp != null)
+                {
+                    //vrh = temp;
+                    temp = temp.next;
+                }
+                novi.next = vrh;
+                vrh = novi;
+            }
+            Ispis(ref vrh);
+            
+        }
+        static void Izlaz(ref Cvor vrh)
+        {
+            if (vrh == null)
+                Console.WriteLine("Red je prazan");
+            else
+            {
+                vrh = vrh.next;
+            }
+
+            Ispis(ref vrh);
+        }
+        static void Ispis(ref Cvor vrh)
+        {
+            Cvor temp = vrh;
+
+            if (temp == null)
+                Console.WriteLine("Red je prazan!!");
+            else
+            {
+                Console.Write("\nSadrzaj reda :> ");
+                while (temp != null)
+                {
+                    Console.Write("  {0}", temp.broj);
+                    temp = temp.next;
+                }
+                Console.WriteLine();
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            Cvor vrh = null;
+            Ulaz(ref vrh);
+            Ulaz(ref vrh);
+            Ulaz(ref vrh);
+            Ulaz(ref vrh);
+            Izlaz(ref vrh);
+        }
+        }
+
+    class Cvor
+    {
+        public int broj;
+        public Cvor next;
+
+        public Cvor()
+        {
+            broj = 0;
+            next = null;
+        }
+
+        public Cvor(int b)
+        {
+            broj = b;
+            next = null;
+        }
+    }
+
+}

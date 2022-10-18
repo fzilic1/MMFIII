@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 a=[]
 b=[]
 
@@ -44,3 +46,32 @@ while z <= 9.81:
     z+=k
 
 file.close()
+
+x_data=[]
+y_data=[]
+x_inter=[]
+y_inter=[]
+
+file=open("V(H-H)_AK.txt", "r")
+l=1
+for line in file:
+    if l>9:
+        podaci=[float(x) for x in line.split()]
+        x_data.append(podaci[0])
+        y_data.append(podaci[1])
+    l+=1
+file.close()
+
+file=open("V(H-H)_inter.txt", "r")
+for line in file:
+    podaci=[float(x) for x in line.split()]
+    x_inter.append(podaci[0])
+    y_inter.append(podaci[1])
+file.close()
+
+plt.plot(x_data, y_data, 'o', label='Zadani podatci')
+plt.plot(x_inter, y_inter, 'x', ms=5, label='Interpolacija')
+plt.xlabel("r / A")
+plt.ylabel("V / K")
+plt.legend()
+plt.show()

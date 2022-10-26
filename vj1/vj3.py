@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from polint import polint
+from scipy.interpolate import CubicSpline
 
 a=[]
 b=[]
@@ -38,16 +39,20 @@ z=2.81
 file = open("V(H-H)_inter.txt", "w")
 y_na=[]
 dy_na=[]
+y_sp=[]
 while z <= 9.81:
     Y=0
     Y=lagrange(a, b, len(a), z, Y)
     
-    file.write("%8.11f\t%8.11f\n" %(z, Y))
-
     temp=polint(a, b, len(a), z)
+    f=CubicSpline(a, b)
+
+    y_sp.append(f(z))
     y_na.append(temp[0])
     dy_na.append(temp[1])
-      
+
+    file.write("%8.11f\t%8.11f\t%8.11f\t%8.11f\t%8.11f\t%8.11f\n" %(z, Y, temp[0], temp[1], f(z), temp[0]-f(z)))
+  
     z+=k
 
 file.close()
@@ -79,7 +84,8 @@ file.close()
 
 plt.plot(x_data, y_data, 'o', label='Zadani podatci')
 plt.plot(x_inter, y_inter, 'x', ms=5, label='Lagrange')
-plt.errorbar(x_inter, y_na, yerr=dy_na, fmt='.', label='Neville')
+plt.errorbar(x_inter, y_na, yerr=dy_na, fmt='.', alpha=0.75, label='Neville')
+plt.plot(x_inter, y_sp, '.', label='Spline')
 plt.xlabel("r / A")
 plt.ylabel("V / K")
 plt.legend()

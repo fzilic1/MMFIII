@@ -12,8 +12,6 @@ def bisekcija(func, epsilon, a, b):
     a=a
     b=b
     c=(a+b)/2
-    temp1=[]
-    temp2=[]
     n=0
     while abs(func(c)) >= epsilon:
         if func(a)*func(c) < 0:

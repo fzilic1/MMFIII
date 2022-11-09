@@ -24,6 +24,7 @@ z=-1
 for i in h:
     z+=1
     xtemp.append(h[z])
+    errtemp.append(h[z])
     for j in x:
         xtemp.append(der2(func, j, i))
         errtemp.append(np.absolute(xtemp[-1]-np.exp(j)))
@@ -43,5 +44,17 @@ for i in x:
     head.append(i)
 
 #print(tabulate(X, headers=head, tablefmt="grid"))
+#print(tabulate(err, headers=head, tablefmt="grid"))
 
-print(err[5][5])
+
+ploty=[]
+for i in range(len(h)):
+    ploty.append(err[i][6])
+
+plt.plot(h, ploty, 'o')
+plt.yscale('log')
+plt.xscale('log')
+plt.xlabel('h')
+plt.ylabel('greška')
+
+plt.show()

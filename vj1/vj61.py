@@ -15,8 +15,6 @@ def trapez(f, a, b, m):
     y=h*y
     return y
 
-print (trapez(func, 0, 2, 4))
-
 def simpson(f, a, b, m):
     h=(b-a)/m
     k=1
@@ -32,4 +30,13 @@ def simpson(f, a, b, m):
     y=(h/3)*y
     return y
 
-print (simpson(func, 0, 2, 4))
+def Maxwell(v):
+    T=300
+    k=1.38064e-23
+    m=3.37e-26
+    M=1.8518304e-8*v**2*np.exp((-m*v**2)/(2*k*T))
+
+    return M
+
+print (trapez(Maxwell, 509.4, 609.4, 2000))
+print (simpson(Maxwell, 509.4, 609.4, 2000))

@@ -31,21 +31,12 @@ def simpson(f, a, b, m):
     return y
 
 def gauleg(f, a, b, n):
-    m=(n+1)%2
-    xm=(a+b)/2
-    xl=(a-b)/2
-    x=np.polynomial.legendre.leggauss(n)
+    x, w =np.polynomial.legendre.leggauss(n)
     i=0
-    y=0
-    while i<m:
-        x[0][i]=xm-xl*x[0][i]
-        x[0][m-i]=xm+xl*x[0][m-i]
-        i+=1
+    
+    t = 0.5*(x + 1)*(b - a) + a
 
-    i=0
-    while i<n:
-        y+=f(x[0][i])*x[1][i]
-        i+=1
+    y=sum(w*f(t))*0.5*(b - a)
 
     return y
 

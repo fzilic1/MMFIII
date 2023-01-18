@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 
+#difuzijska jednadžba
 def explicit(ut0, t0, Dt, M, x0, X, N, a):
     dx=(X-x0)/N
     dt=Dt

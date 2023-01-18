@@ -52,6 +52,6 @@ plt.plot(X, U[20], label='t=0.2')
 
 plt.xlabel('x')
 plt.ylabel('u(x, t)')
-plt.title('Nametnuti uvjeti')
+plt.title('Valna jednadžba')
 plt.legend()
 plt.show()
